@@ -21,10 +21,10 @@ import sys
 
 # --- optional-liger bootstrap
 try:
-    from liger_kernel.transformers import apply_liger_kernel_to_llama
-    _HAS_LIGER = True
+	from liger_kernel.transformers import apply_liger_kernel_to_llama
+	_HAS_LIGER = True
 except ModuleNotFoundError:
-    _HAS_LIGER = False
+	_HAS_LIGER = False
 except Exception as e:
 	_HAS_LIGER = False
 	print(f"[WARN] Liger kernel could not be imported: {e}")
@@ -37,68 +37,68 @@ LOGO_SRC = """data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0i
 MODEL_PATH = "fancyfeast/llama-joycaption-beta-one-hf-llava"
 TITLE = f"""<style>
   .joy-header   {{display:flex; align-items:center; justify-content:center;
-                 gap:16px; margin:4px 0 12px;}}
+				 gap:16px; margin:4px 0 12px;}}
   .joy-header h1{{margin:0; font-size:1.9rem; line-height:1.2;}}
   .joy-header p {{margin:2px 0 0; font-size:0.9rem; color:#666;}}
   .joy-header img{{height:56px;}}
 
   .error-box {{
-    border: 1px solid #ff5555;
-    background-color: #fff0f0;
-    border-radius: 4px;
-    padding: 8px 12px;
-    margin: 8px 0;
-    color: #d00;
-    font-size: 0.9em;
+	border: 1px solid #ff5555;
+	background-color: #fff0f0;
+	border-radius: 4px;
+	padding: 8px 12px;
+	margin: 8px 0;
+	color: #d00;
+	font-size: 0.9em;
   }}
   
   .info-box {{
-    border: 1px solid #5555ff;
-    background-color: #f0f0ff;
-    border-radius: 4px;
-    padding: 8px 12px;
-    margin: 8px 0;
-    color: #00d;
-    font-size: 0.9em;
+	border: 1px solid #5555ff;
+	background-color: #f0f0ff;
+	border-radius: 4px;
+	padding: 8px 12px;
+	margin: 8px 0;
+	color: #00d;
+	font-size: 0.9em;
   }}
   
   .success-box {{
-    border: 1px solid #55aa55;
-    background-color: #f0fff0;
-    border-radius: 4px;
-    padding: 8px 12px;
-    margin: 8px 0;
-    color: #080;
-    font-size: 0.9em;
+	border: 1px solid #55aa55;
+	background-color: #f0fff0;
+	border-radius: 4px;
+	padding: 8px 12px;
+	margin: 8px 0;
+	color: #080;
+	font-size: 0.9em;
   }}
   
   .panel-header {{
-    background-color: #f5f5f5;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 4px;
-    border-left: 4px solid #4b5563;
+	background-color: #f5f5f5;
+	padding: 10px;
+	margin-bottom: 15px;
+	border-radius: 4px;
+	border-left: 4px solid #4b5563;
   }}
   
   .compact-row {{
-    margin-bottom: 0 !important;
+	margin-bottom: 0 !important;
   }}
 
   #global_error {{
-    background-color: #fff0f0;
-    border-left: 4px solid #ff5555;
-    padding: 12px;
-    margin: 0 0 15px 0;
-    font-weight: 500;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+	background-color: #fff0f0;
+	border-left: 4px solid #ff5555;
+	padding: 12px;
+	margin: 0 0 15px 0;
+	font-weight: 500;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   }}
 </style>
 
 <div class="joy-header">
   <img src="{LOGO_SRC}" alt="JoyCaption logo">
   <div>
-    <h1>JoyCaption <span style="font-weight:400">Beta&nbsp;One</span></h1>
-    <p>Image-captioning model &nbsp;|&nbsp; build mb3500zp</p>
+	<h1>JoyCaption <span style="font-weight:400">Beta&nbsp;One</span></h1>
+	<p>Image-captioning model &nbsp;|&nbsp; build mb3500zp</p>
   </div>
 </div>
 <hr>"""
@@ -108,24 +108,24 @@ DESCRIPTION = """
 <ol>
   <li><strong>Upload</strong> an image in the left-hand panel.</li>
   <li>Select a <strong>Caption&nbsp;Type</strong> and set a <strong>Caption&nbsp;Length</strong>
-      (or leave “any”).</li>
+	  (or leave “any”).</li>
   <li>(Optional) open <em>Extra&nbsp;Options</em> and tick anything
-      you want the model to mention / omit.</li>
+	  you want the model to mention / omit.</li>
   <li>(Optional) open <em>Generation settings</em> to adjust
-      <code>temperature</code>, <code>top-p</code>, or <code>max tokens</code>.</li>
+	  <code>temperature</code>, <code>top-p</code>, or <code>max tokens</code>.</li>
   <li>Press <kbd>Caption</kbd>.  
-      The exact prompt goes into the <em>Prompt</em> box (editable);  
-      the caption streams into the <em>Generated Caption</em> box.</li>
+	  The exact prompt goes into the <em>Prompt</em> box (editable);  
+	  the caption streams into the <em>Generated Caption</em> box.</li>
 </ol>
 
 <h2>Quick-start (Batch tab)</h2>
 <ol>
   <li><strong>Upload multiple images</strong> (PNG/JPEG/WEBP, any mix).
-      Filenames are used to name the output <code>.txt</code> files.</li>
+	  Filenames are used to name the output <code>.txt</code> files.</li>
   <li>Set <strong>DataLoader Workers</strong> (CPU processes) and
-      <strong>Batch Size</strong> to balance speed vs. GPU VRAM.</li>
+	  <strong>Batch Size</strong> to balance speed vs. GPU VRAM.</li>
   <li>Press <kbd>Start Batch Process & Create ZIP</kbd>.
-      When finished, a ZIP containing all captions appears for download.</li>
+	  When finished, a ZIP containing all captions appears for download.</li>
 </ol>
 
 <!-- ───────────────────── Caption-type reference ──────────────────── -->
@@ -133,33 +133,33 @@ DESCRIPTION = """
 <table>
   <tr><th>Mode</th><th>What it does</th></tr>
   <tr><td><strong>Descriptive</strong></td>
-      <td>Formal, detailed prose description.</td></tr>
+	  <td>Formal, detailed prose description.</td></tr>
   <tr><td><strong>Descriptive&nbsp;(Casual)</strong></td>
-      <td>Similar to Descriptive but with a friendlier, conversational tone.</td></tr>
+	  <td>Similar to Descriptive but with a friendlier, conversational tone.</td></tr>
   <tr><td><strong>Straightforward</strong></td>
-      <td>Objective, no fluff, and more succinct than Descriptive.</td></tr>
+	  <td>Objective, no fluff, and more succinct than Descriptive.</td></tr>
   <tr><td><strong>Stable Diffusion Prompt</strong></td>
-      <td>Reverse-engineers a prompt that could have produced the image in a SD/T2I model.<br><em>⚠︎ Experimental – can glitch ≈ 3% of the time.</em></td></tr>
+	  <td>Reverse-engineers a prompt that could have produced the image in a SD/T2I model.<br><em>⚠︎ Experimental – can glitch ≈ 3% of the time.</em></td></tr>
   <tr><td><strong>MidJourney</strong></td>
-      <td>Same idea as above but tuned to MidJourney’s prompt style.<br><em>⚠︎ Experimental – can glitch ≈ 3% of the time.</em></td></tr>
+	  <td>Same idea as above but tuned to MidJourney’s prompt style.<br><em>⚠︎ Experimental – can glitch ≈ 3% of the time.</em></td></tr>
   <tr><td><strong>Danbooru tag list</strong></td>
-      <td>Comma-separated tags strictly following Danbooru conventions
-          (artist:, copyright:, etc.). Lower-case underscores only.<br><em>⚠︎ Experimental – can glitch ≈ 3% of the time.</em></td></tr>
+	  <td>Comma-separated tags strictly following Danbooru conventions
+		  (artist:, copyright:, etc.). Lower-case underscores only.<br><em>⚠︎ Experimental – can glitch ≈ 3% of the time.</em></td></tr>
   <tr><td><strong>e621 tag list</strong></td>
-      <td>Alphabetical, namespaced tags in e621 style – includes species/meta
-          tags when relevant.<br><em>⚠︎ Experimental – can glitch ≈ 3% of the time.</em></td></tr>
+	  <td>Alphabetical, namespaced tags in e621 style – includes species/meta
+		  tags when relevant.<br><em>⚠︎ Experimental – can glitch ≈ 3% of the time.</em></td></tr>
   <tr><td><strong>Rule34 tag list</strong></td>
-      <td>Rule34 style alphabetical tag dump; artist/copyright/character
-          prefixes first.<br><em>⚠︎ Experimental – can glitch ≈ 3% of the time.</em></td></tr>
+	  <td>Rule34 style alphabetical tag dump; artist/copyright/character
+		  prefixes first.<br><em>⚠︎ Experimental – can glitch ≈ 3% of the time.</em></td></tr>
   <tr><td><strong>Booru-like tag list</strong></td>
-      <td>Looser tag list when you want labels but not a specific Booru format.<br><em>⚠︎ Experimental – can glitch ≈ 3% of the time.</em></td></tr>
+	  <td>Looser tag list when you want labels but not a specific Booru format.<br><em>⚠︎ Experimental – can glitch ≈ 3% of the time.</em></td></tr>
   <tr><td><strong>Art Critic</strong></td>
-      <td>Paragraph of art-historical commentary: composition, symbolism, style,
-          lighting, movement, etc.</td></tr>
+	  <td>Paragraph of art-historical commentary: composition, symbolism, style,
+		  lighting, movement, etc.</td></tr>
   <tr><td><strong>Product Listing</strong></td>
-      <td>Short marketing copy as if selling the depicted object.</td></tr>
+	  <td>Short marketing copy as if selling the depicted object.</td></tr>
   <tr><td><strong>Social Media Post</strong></td>
-      <td>Catchy caption aimed at platforms like Instagram or BlueSky.</td></tr>
+	  <td>Catchy caption aimed at platforms like Instagram or BlueSky.</td></tr>
 </table>
 
 <p style="margin-top:0.6em">
@@ -178,9 +178,9 @@ instantly.</p>
 <h3>Generation settings</h3>
 <ul>
   <li><strong>Temperature</strong> – randomness.  
-      0&nbsp;=&nbsp;deterministic; higher =&nbsp;more variety.</li>
+	  0&nbsp;=&nbsp;deterministic; higher =&nbsp;more variety.</li>
   <li><strong>Top-p</strong> – nucleus sampling cutoff. Lower =&nbsp;safer,
-      higher =&nbsp;freer.</li>
+	  higher =&nbsp;freer.</li>
   <li><strong>Max&nbsp;New Tokens</strong> – hard stop for the model’s output length.</li>
 </ul>
 
@@ -283,15 +283,30 @@ def hide_global_error():
 def load_model(quant: str, status: gr.HTML | None = None):
 	"""Load the model and processor if not already loaded."""
 	global g_processor, g_model, g_quant
+
 	if g_processor is None:
 		print("Loading processor...")
 		if status is not None:
 			yield {status: format_info("Loading processor...")}
-		
+
 		try:
 			g_processor = AutoProcessor.from_pretrained(MODEL_PATH)
+
 			if g_processor.tokenizer.pad_token is None:
 				g_processor.tokenizer.pad_token = g_processor.tokenizer.eos_token
+
+			# Fix unsupported interpolation (lanczos → bicubic)
+			if hasattr(g_processor, "image_processor"):
+				ip = g_processor.image_processor
+				if hasattr(ip, "resample"):
+					ip.resample = 3  # PIL.Image.BICUBIC
+				if hasattr(ip, "interpolation"):
+					try:
+						from torchvision.transforms import InterpolationMode
+						ip.interpolation = InterpolationMode.BICUBIC
+					except Exception:
+						ip.interpolation = "bicubic"
+
 		except Exception as e:
 			error_msg = f"Failed to load processor: {e}"
 			print(error_msg)
@@ -317,7 +332,9 @@ def load_model(quant: str, status: gr.HTML | None = None):
 				assert isinstance(g_model, LlavaForConditionalGeneration), f"Expected LlavaForConditionalGeneration, got {type(g_model)}"
 				if _HAS_LIGER:
 					try:
-						apply_liger_kernel_to_llama(model=g_model.language_model)  # Meow
+						_lm = getattr(g_model, 'language_model', None) or getattr(g_model, 'model', None)
+						if _lm is not None:
+							apply_liger_kernel_to_llama(model=_lm)  # Meow
 					except Exception as e:
 						print(f"[WARN] Liger kernel could not be applied: {e}")
 			else:
@@ -325,7 +342,7 @@ def load_model(quant: str, status: gr.HTML | None = None):
 				if quant == "8bit":
 					qnt_config = BitsAndBytesConfig(
 						load_in_8bit=True,
-						llm_int8_skip_modules=["vision_tower", "multi_modal_projector"],   # Transformer's Siglip implementation has bugs when quantized, so skip those.
+						llm_8bit_skip_modules=["vision_tower", "vision_model", "multi_modal_projector", "projector"],
 					)
 				elif quant == "nf4":
 					qnt_config = BitsAndBytesConfig(
@@ -333,7 +350,7 @@ def load_model(quant: str, status: gr.HTML | None = None):
 						bnb_4bit_quant_type="nf4",
 						bnb_4bit_compute_dtype=torch.bfloat16,
 						bnb_4bit_use_double_quant=True,
-						llm_int8_skip_modules=["vision_tower", "multi_modal_projector"],   # Transformer's Siglip implementation has bugs when quantized, so skip those.
+						llm_8bit_skip_modules=["vision_tower", "vision_model", "multi_modal_projector", "projector"],
 					)
 				else:
 					raise ValueError(f"Unknown quantization type: {quant}")
@@ -341,8 +358,18 @@ def load_model(quant: str, status: gr.HTML | None = None):
 				g_model = LlavaForConditionalGeneration.from_pretrained(MODEL_PATH, torch_dtype="auto", device_map=0, quantization_config=qnt_config)
 				assert isinstance(g_model, LlavaForConditionalGeneration), f"Expected LlavaForConditionalGeneration, got {type(g_model)}"
 
+				# SiGLIP's nn.MultiheadAttention bypasses bitsandbytes dequantization hooks,
+				# so the vision tower MUST remain in float. Force it back to bfloat16.
+				_inner = getattr(g_model, 'model', g_model)
+				for attr_name in ('vision_tower', 'vision_model', 'multi_modal_projector', 'projector'):
+					submodule = getattr(_inner, attr_name, None) or getattr(g_model, attr_name, None)
+					if submodule is not None:
+						submodule.to(dtype=torch.bfloat16)
+
 			g_model.eval()
-			g_quant = quant
+			g_quant = quant.lower()
+			if quant == "8bit":
+				quant = "8bit"
 			# Hide any global error when model loads successfully
 			yield {global_error: hide_global_error()}
 		except Exception as e:
@@ -467,7 +494,7 @@ def chat_joycaption(input_image: Image.Image, prompt: str, temperature: float, t
 		inputs = g_processor(text=[convo_string], images=[input_image], return_tensors="pt").to('cuda')
 		inputs['pixel_values'] = inputs['pixel_values'].to(torch.bfloat16)
 
-		streamer = TextIteratorStreamer(g_processor.tokenizer, timeout=10.0, skip_prompt=True, skip_special_tokens=True)
+		streamer = TextIteratorStreamer(g_processor.tokenizer, timeout=120.0, skip_prompt=True, skip_special_tokens=True)
 
 		generate_kwargs = dict(
 			**inputs,
@@ -481,15 +508,32 @@ def chat_joycaption(input_image: Image.Image, prompt: str, temperature: float, t
 			streamer=streamer,
 		)
 
-		t = Thread(target=g_model.generate, kwargs=generate_kwargs)
+		# Wrap generate to capture exceptions from the thread
+		thread_exception = [None]
+		def _generate_with_error_capture(**kwargs):
+			try:
+				g_model.generate(**kwargs)
+			except Exception as exc:
+				thread_exception[0] = exc
+				raise
+
+		t = Thread(target=_generate_with_error_capture, kwargs=generate_kwargs)
 		t.start()
 
 		outputs = []
-		for text in streamer:
-			outputs.append(text)
-			yield {output_caption_single: "".join(outputs), single_status_output: format_info("Generating caption...")}
+		try:
+			for text in streamer:
+				outputs.append(text)
+				yield {output_caption_single: "".join(outputs), single_status_output: format_info("Generating caption...")}
+		except Exception:
+			t.join(timeout=5)
+			if thread_exception[0] is not None:
+				raise thread_exception[0]
+			raise
 		
 		t.join()
+		if thread_exception[0] is not None:
+			raise thread_exception[0]
 		yield {single_status_output: gr.update(value="Captioning complete!")}
 	except Exception as e:
 		error_msg = f"Error during generation: {str(e)}"
@@ -532,9 +576,20 @@ def process_batch_files(
 		return
 	
 	try:
-		vision_dtype = g_model.vision_tower.vision_model.embeddings.patch_embedding.weight.dtype
-		vision_device = g_model.vision_tower.vision_model.embeddings.patch_embedding.weight.device
-		language_device = g_model.language_model.get_input_embeddings().weight.device
+		# Discover vision encoder dtype/device (attribute name varies across transformers versions)
+		_vt = getattr(g_model, 'vision_tower', None) or getattr(g_model, 'vision_model', None)
+		if _vt is not None:
+			_param = next(_vt.parameters())
+			vision_dtype = _param.dtype
+			vision_device = _param.device
+		else:
+			vision_dtype = next(g_model.parameters()).dtype
+			vision_device = next(g_model.parameters()).device
+		_lm = getattr(g_model, 'language_model', None) or getattr(g_model, 'model', None)
+		if _lm is not None:
+			language_device = _lm.get_input_embeddings().weight.device
+		else:
+			language_device = vision_device
 
 		captions_dict: dict[str, str] = {}
 		prompt = build_prompt(caption_type, caption_length, extra_options, name_input)
@@ -551,14 +606,14 @@ def process_batch_files(
 					continue
 		
 				# Move to GPU
-				pixel_values = batch['pixel_values'].to(vision_device, non_blocking=True)
+				pixel_values = batch['pixel_values'].to(vision_device, dtype=torch.bfloat16, non_blocking=True)
 				input_ids = batch['input_ids'].to(language_device, non_blocking=True)
 				attention_mask = batch['attention_mask'].to(language_device, non_blocking=True)
 
 				# Generate the captions
 				generate_ids = g_model.generate(
 					input_ids=input_ids,
-					pixel_values=pixel_values.to(vision_dtype),
+					pixel_values=pixel_values,
 					attention_mask=attention_mask,
 					max_new_tokens=max_new_tokens,
 					do_sample=True if temperature > 0 else False,
@@ -659,7 +714,7 @@ with gr.Blocks() as demo:
 	with gr.Row(equal_height=True) as top_row:
 		with gr.Column(scale=1):
 			model_quantization = gr.Dropdown(
-				choices=["bf16", "int8", "nf4"],
+				choices=["bf16", "8bit", "nf4"],
 				value="bf16",
 				label="Model Quantization",
 				info="Model quantization level (bf16=highest quality, 8bit/nf4=lower memory)",
